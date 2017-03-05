@@ -1,6 +1,6 @@
 public class Frame {
-  private int pins1;
-  private int pins2;
+  protected int pins1;
+  protected int pins2;
   private Frame nextFrame;
   private int selfScore;
 
@@ -18,18 +18,22 @@ public class Frame {
     if (nextFrame == null) {
       return 0;
     }
-    int bonus = nextFrame.pins1;
+    int bonus = 0;
     if (isStrikes()) {
       if (nextFrame.isStrikes()) {
-        bonus += nextFrame.nextFrame.pins1;
+        if (nextFrame.nextFrame == null) {
+          bonus = nextFrame.pins1 + nextFrame.pins2;
+        }else {
+        bonus = nextFrame.pins1 + nextFrame.nextFrame.pins1;
+        }
+
       } else {
-        bonus += nextFrame.pins2;
+        bonus = nextFrame.pins1 + nextFrame.pins2;
       }
     } else if (isSpare()) {
-      if (nextFrame.isSpare()) {
-        bonus += nextFrame.nextFrame.pins1;
-      }
+      bonus = nextFrame.pins1;
     }
+
     return bonus;
   }
 
