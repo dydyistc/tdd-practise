@@ -10,4 +10,14 @@ public class FrameTest {
     int score = frame.score();
     assertThat(score, is(9));
   }
+
+  @Test
+  public void scoreWithSparesWhenNextFrameIsNormal() throws Exception {
+    Frame frame1 = new Frame(4, 6);
+    Frame frame2 = new Frame(1, 0);
+    frame1.setNextFrame(frame2);
+
+    int score = frame1.score();
+    assertThat(score, is(11));
+  }
 }
