@@ -20,4 +20,15 @@ public class FrameTest {
     int score = frame1.score();
     assertThat(score, is(11));
   }
+
+  @Test
+  public void scoreWithSpareWhenNextFrameIsStrike() throws Exception {
+    Frame frame1 = new Frame(4, 6);
+    Frame frame2 = new Frame(10, 0);
+    Frame frame3 = new Frame(4, 2);
+    frame1.setNextFrame(frame2);
+    frame2.setNextFrame(frame3);
+
+    assertThat(frame1.score(), is(24));
+  }
 }

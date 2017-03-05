@@ -10,6 +10,9 @@ public class Frame {
 
   public int score() {
     if (pins1 + pins2 == 10) {
+      if (nextFrame.pins1 == 10) {
+        return pins1 + pins2 + nextFrame.pins1 + nextFrame.nextFrame.pins1;
+      }
       return pins1 + pins2 + nextFrame.pins1;
     }
     return pins1 + pins2;
