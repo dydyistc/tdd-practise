@@ -40,4 +40,16 @@ public class FrameTest {
 
     assertThat(frame1.score(), is(15));
   }
+
+  @Test
+  public void scoreWithStrikesWhenNextFrameIsStrikes() throws Exception {
+    Frame frame1 = new Frame(10, 0);
+    Frame frame2 = new Frame(10, 0);
+    Frame frame3 = new Frame(2, 3);
+
+    frame1.setNextFrame(frame2);
+    frame2.setNextFrame(frame3);
+
+    assertThat(frame1.score(), is(22));
+  }
 }

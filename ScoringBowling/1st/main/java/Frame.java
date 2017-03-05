@@ -13,7 +13,12 @@ public class Frame {
   public int score() {
     boolean isStrikes = pins1 == 10;
     if (isStrikes) {
+      if (nextFrame.pins1 == 10) {
+        return selfScore + nextFrame.selfScore + nextFrame.nextFrame.pins1;
+      } else {
+
       return selfScore + nextFrame.selfScore;
+      }
     }
     else if (isSpare(selfScore)) {
       return scoreWithBonus();
