@@ -2,6 +2,7 @@ public class Frame {
   private int pins1;
   private int pins2;
   private Frame nextFrame;
+  private int selfScore;
 
   public Frame(int pins1, int pins2) {
     this.pins1 = pins1;
@@ -9,13 +10,23 @@ public class Frame {
   }
 
   public int score() {
-    if (pins1 + pins2 == 10) {
-      if (nextFrame.pins1 == 10) {
-        return pins1 + pins2 + nextFrame.pins1 + nextFrame.nextFrame.pins1;
-      }
-      return pins1 + pins2 + nextFrame.pins1;
+    selfScore = pins1 + pins2;
+    if (isSpare(selfScore)) {
+      return scoreWithBonus();
+    } else {
+      return selfScore;
     }
-    return pins1 + pins2;
+  }
+
+  private int scoreWithBonus() {
+    if (isSpare(nextFrame.pins1)) {
+      return selfScore + nextFrame.pins1 + nextFrame.nextFrame.pins1;
+    }
+    return selfScore + nextFrame.pins1;
+  }
+
+  private boolean isSpare(int pins) {
+    return pins == 10;
   }
 
   public Frame getNextFrame() {

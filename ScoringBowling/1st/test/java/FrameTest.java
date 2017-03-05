@@ -31,4 +31,5 @@ public class FrameTest {
 
     assertThat(frame1.score(), is(24));
   }
+
 }
