@@ -1,2 +1,3 @@
 rootProject.name = 'ScoringBowling'
+include 'Kata'
 
