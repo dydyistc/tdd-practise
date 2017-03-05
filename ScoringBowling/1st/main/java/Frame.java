@@ -7,11 +7,15 @@ public class Frame {
   public Frame(int pins1, int pins2) {
     this.pins1 = pins1;
     this.pins2 = pins2;
+    selfScore = pins1 + pins2;
   }
 
   public int score() {
-    selfScore = pins1 + pins2;
-    if (isSpare(selfScore)) {
+    boolean isStrikes = pins1 == 10;
+    if (isStrikes) {
+      return selfScore + nextFrame.selfScore;
+    }
+    else if (isSpare(selfScore)) {
       return scoreWithBonus();
     } else {
       return selfScore;

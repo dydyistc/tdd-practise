@@ -32,4 +32,12 @@ public class FrameTest {
     assertThat(frame1.score(), is(24));
   }
 
+  @Test
+  public void scoreWithStrikesWhenNextFrameIsNormal() throws Exception {
+    Frame frame1 = new Frame(10, 0);
+    Frame frame2 = new Frame(2, 3);
+    frame1.setNextFrame(frame2);
+
+    assertThat(frame1.score(), is(15));
+  }
 }
