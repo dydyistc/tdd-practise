@@ -11,31 +11,34 @@ public class Frame {
   }
 
   public int score() {
-    boolean isStrikes = pins1 == 10;
-    if (isStrikes) {
-      if (nextFrame.pins1 == 10) {
-        return selfScore + nextFrame.selfScore + nextFrame.nextFrame.pins1;
-      } else {
+    return selfScore + calculateBonus();
+  }
 
-      return selfScore + nextFrame.selfScore;
+  private int calculateBonus() {
+    if (nextFrame == null) {
+      return 0;
+    }
+    int bonus = nextFrame.pins1;
+    if (isStrikes()) {
+      if (nextFrame.isStrikes()) {
+        bonus += nextFrame.nextFrame.pins1;
+      } else {
+        bonus += nextFrame.pins2;
+      }
+    } else if (isSpare()) {
+      if (nextFrame.isSpare()) {
+        bonus += nextFrame.nextFrame.pins1;
       }
     }
-    else if (isSpare(selfScore)) {
-      return scoreWithBonus();
-    } else {
-      return selfScore;
-    }
+    return bonus;
   }
 
-  private int scoreWithBonus() {
-    if (isSpare(nextFrame.pins1)) {
-      return selfScore + nextFrame.pins1 + nextFrame.nextFrame.pins1;
-    }
-    return selfScore + nextFrame.pins1;
+  private boolean isStrikes() {
+    return pins1 == 10;
   }
 
-  private boolean isSpare(int pins) {
-    return pins == 10;
+  private boolean isSpare() {
+    return pins1 + pins2 == 10;
   }
 
   public Frame getNextFrame() {
