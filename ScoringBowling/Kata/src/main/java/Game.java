@@ -1,3 +1,6 @@
+/**
+ * This project is a TDD practise.
+ */
 public class Game {
 
   private int rolls[] = new int[21];
